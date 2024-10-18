@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+
+  <script type="module" src="https://dock.ui.bosch.tech/releases/4-latest/build/dock-privacy-settings.esm.js"></script>
+  <script nomodule="" src="https://dock.ui.bosch.tech/releases/4-latest/build/dock-privacy-settings.js"></script>
+  <script type="module" src="https://dock.ui.bosch.tech/releases/4-latest/build/dock-privacy-settings.esm.js"></script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    const GTM_ID = '' // TODO: Add GTM ID
+    window.dataLayer = window.dataLayer || []
+
+    function gtag() {
+      window.dataLayer.push(arguments)
+    }
+
+    (function(w, d, s, l, i) {
+      w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js',
+      })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', GTM_ID)
+  </script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=[[GTM_ID]]" height="0" width="0" style="display:none;visibility:hidden"></iframe> <!-- TODO: Replace [[GTM_ID]] with GTM ID -->
+</noscript>
+
+<script>
+  window.cookieStore.getAll().then((cookies) => {
+    cookies.forEach((cookie) => {
+      gtag('set', cookie.name, cookie.value)
+    })
+  })
+</script>
+<script>
+  const dockElement = document.createElement('dock-privacy-settings')
+  Object.assign(dockElement, {
+    googleConsentModeIntegration: 'both',
+  })
+  document.body.appendChild(dockElement)
+</script>
+
+<script>
+  function BoschPrivacyCallback_OnUpdate(consents) {
+    if (consents.analysis) {
+      dataLayer.push({ event: 'bosch_privacy_update_analysis_on' })
+    }
+    if (consents.marketing) {
+      dataLayer.push({ event: 'bosch_privacy_update_marketing_on' })
+    }
+  }
+</script>
+</body>
+</html>
